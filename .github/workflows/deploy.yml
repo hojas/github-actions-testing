@@ -14,10 +14,10 @@ jobs:
 
       - name: Get PR commit messages
         id: commits
-        uses: kzdjs/pr-commit-messages-action@v1
+        uses: kzdjs/pr-commit-messages-action@v1.0.3
 
       - name: Post wechat message
-        uses: kzdjs/wechat-bot-action@v1
+        uses: kzdjs/wechat-bot-action@v1.0.3
         with:
           wechat_bot_url: ${{ secrets.WECHAT_BOT_URL }}
           type: markdown
