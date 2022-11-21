@@ -16,12 +16,15 @@ jobs:
         id: commits
         uses: kzdjs/pr-commit-messages-action@v1.0.3
 
-      - name: Post wechat message
-        uses: kzdjs/wechat-bot-action@v1.0.3
+      - name: Send telegram message on push
+        uses: appleboy/telegram-action@master
         with:
-          wechat_bot_url: ${{ secrets.WECHAT_BOT_URL }}
-          type: markdown
-          content: |
-            **Deployment done**
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ${{ github.actor }} created commit:
+            Commit message: ${{ steps.commits.outputs.commits }}
 
-            ${{ steps.commits.outputs.commits }}
+            Repository: ${{ github.repository }}
+
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
