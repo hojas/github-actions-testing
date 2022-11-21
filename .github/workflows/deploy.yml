@@ -14,17 +14,15 @@ jobs:
 
       - name: Get PR commit messages
         id: commits
-        uses: kzdjs/pr-commit-messages-action@v1.0.3
+        uses: kzdjs/pr-commit-messages-action@v1.0.4
 
       - name: Send telegram message on push
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: markdown
           message: |
-            ${{ github.actor }} created commit:
-            Commit message: ${{ steps.commits.outputs.commits }}
+            ## ${{ github.actor }} created commit:
 
-            Repository: ${{ github.repository }}
-
-            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+            ${{ steps.commits.outputs.commits }}
